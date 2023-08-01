@@ -1,6 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Category = () => {
+  const [product, setProduct] = useState([]);
+  useEffect(()=>{
+    fetch()
+  })
   return (
     <div className="max-w-[1440px] mx-auto flex gap-12">
       <div className="flex justify-between min-w-[200px] min-h-full">
