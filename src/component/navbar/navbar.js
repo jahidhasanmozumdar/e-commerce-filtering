@@ -5,8 +5,8 @@ import { GrFavorite } from "react-icons/gr";
 const Navbar = () => {
   return (
     <div>
-      <div class="flex flex-row justify-around h-16 items-center ">
-        <div class="text-4xl">MS</div>
+      <div className="flex flex-row justify-around h-16 items-center ">
+        <div className="text-4xl">MS</div>
         <div>
           <input
             type="text"
@@ -14,7 +14,7 @@ const Navbar = () => {
             className="input border-solid border-2 border-sky-500 w-24 h-7 md:w-auto"
           />
         </div>
-        <div class="flex flex-row justify-between items-center gap-5">
+        <div className="flex flex-row justify-between items-center gap-5">
           <button className="text-3xl">
             <GrFavorite></GrFavorite>
           </button>
