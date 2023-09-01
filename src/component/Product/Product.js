@@ -1,27 +1,40 @@
 import React from "react";
 
 const Product = (props) => {
-  console.log(props);
+  const { img, title, prevPrice, newPrice, company } = props.products;
   return (
-    <div className="grid grid-cols-4 gap-4">
-      <div class="w-60 p-6 bg-slate-500 rounded-xl shadow-sm hover:shadow-xl hover:scale-120 transition-all transform duration-500">
+    <div className="min-w-[343px] min-h-[477px] max-h-[477px] px-[10px] py-[15px] bg-white rounded-xl shadow-lg border border-gray-500 hover:shadow-xl hover:scale-120 transition-all transform duration-500">
+      <div className="min-h-[231px] max-h-[225px] w-full overflow-hidden">
         <img
-          class="w-64 object-cover rounded-t-md"
-          src="https://images.unsplash.com/photo-1509223197845-458d87318791"
+          className=" object-contain rounded-t-md min-h-[231px] max-h-[225px] w-full relative"
+          src={img}
           alt=""
         />
-        <div class="mt-4">
-          <h1 class="text-2xl font-bold text-gray-700">Zebra succulent</h1>
-          <p class="text-sm mt-2 text-gray-700">Two sizes</p>
+      </div>
 
-          <div class="mt-4 mb-2 flex justify-between pl-4 pr-2">
-            <button class="block text-xl font-semibold text-gray-700 cursor-auto">
-              $12.99
+      <div className="max-h-[238px]">
+        <div className="flex flex-col justify-center items-start">
+          <h1 className="text-2xl font-bold text-gray-700">{title}</h1>
+          <p className="text-sm mt-2 text-gray-700">{company}</p>
+        </div>
+
+        <div className="mt-4 mb-2 flex justify-between pl-4 pr-2">
+          <div className="flex flex-col justify-center items-start">
+            <button className="block text-xl font-semibold text-gray-700 cursor-auto">
+              <small>Prev: </small>
+              <del>{prevPrice}</del>
             </button>
-            <button class="text-lg block font-semibold py-2 px-6 text-green-100 hover:text-white bg-green-400 rounded-lg shadow hover:shadow-md transition duration-300">
-              Buy
+            <button className="block text-xl font-semibold text-gray-700 cursor-auto">
+              <small>New: </small>
+              {newPrice}
             </button>
           </div>
+          <button
+            type="button"
+            className="px-3 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800  focus:outline-none  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Buy Now
+          </button>
         </div>
       </div>
     </div>
