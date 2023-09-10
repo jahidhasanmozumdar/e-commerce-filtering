@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import Product from "../Product/Product";
 
 const Category = () => {
+  const [priceRange, setPriceRange] = useState(1000);
+
+  const handlePriceChange = (e) => {
+    setPriceRange(e.target.value);
+  };
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetch("product.json")
@@ -14,10 +19,8 @@ const Category = () => {
 
   // input filter
   const [select, setSelect] = useState("");
-  const [selectPrice, setSelectPrice] = useState("");
   const [buttonData, setButtonData] = useState();
   const [searchValue, setSearchValue] = useState("");
-  console.log(selectPrice);
 
   const searchHandle = (event) => {
     setSearchValue(event.target.value);
@@ -37,31 +40,28 @@ const Category = () => {
     const buttonValue = e.target.value;
     setButtonData(buttonValue);
   };
-  //--------button filter for Price---------
-  const handleClickForPrice = (e) => {
-    const minValue = e.target.min;
-    const maxValue = e.target.max;
-    console.log(minValue, maxValue);
-  };
 
   //--------filtered Data----------
-  function filterData(products, select, buttonData) {
+  function filterData(products, select) {
     let filterProduct = products;
 
     if (select === "all") {
       filterProduct = products;
     } else if (select) {
       filterProduct = filterProduct.filter(
-        ({ category, color, company, newPrice }) =>
-          category === select ||
-          color === select ||
-          company === select ||
-          newPrice === select
+        ({ category, color, company }) =>
+          category === select || color === select || company === select
       );
     }
+
+    filterProduct = filterProduct.filter(
+      ({ newPrice }) => newPrice <= priceRange
+    );
+
     return filterProduct;
   }
-  let finalData = filterData(products, select, buttonData);
+
+  let finalData = filterData(products, select, buttonData, priceRange);
   return (
     <div className="flex flex-row max-w-[1440px] mx-auto gap-[40px]">
       <div className="flex justify-between min-w-[300px] min-h-full">
@@ -114,72 +114,29 @@ const Category = () => {
               <label htmlFor="Hells"> Hells</label>
             </div>
           </div>
+
           <div>
-            <h2 className="text-xl ">Price</h2>
-            <div>
-              <label htmlFor="">
-                <input
-                  type="radio"
-                  name="Price"
-                  value="All"
-                  onChange={handleChange}
-                />
-                All
-              </label>
-            </div>
-            <div>
-              <label htmlFor="">
-                <input
-                  type="radio"
-                  name="Price"
-                  value={1000}
-                  min={1000}
-                  max={1100}
-                  onChange={handleChange}
-                />
-                $1000 - 1100
-              </label>
-            </div>
-            <div>
-              <label htmlFor="">
-                <input
-                  type="radio"
-                  name="Price"
-                  value={1100}
-                  min={1100}
-                  max={1200}
-                  onChange={handleChange}
-                />
-                $1100 - 1200
-              </label>
-            </div>
-            <div>
-              <label htmlFor="Sandals">
-                <input
-                  type="radio"
-                  name="Price"
-                  value={1300}
-                  min={1300}
-                  max={1350}
-                  onChange={handleChange}
-                />
-                $1300 - 1350
-              </label>
-            </div>
-            <div>
-              <label htmlFor="">
-                <input
-                  type="radio"
-                  name="Price"
-                  value={1350}
-                  min={1350}
-                  max={1400}
-                  onChange={handleChange}
-                />
-                $1350 - 1400
-              </label>
-            </div>
+            <h1 className="text-2xl font-semibold mb-4">Price Filter</h1>
+
+            <label htmlFor="priceRange" className="block mb-2 text-gray-700">
+              Select Price Range:
+            </label>
+            <input
+              type="range"
+              id="priceRange"
+              min="800"
+              max="10000"
+              step=""
+              value={priceRange}
+              onChange={handlePriceChange}
+              className="w-full h-[5px] text-[gray]"
+            />
+            <p className="mt-2">
+              Price Range:{" "}
+              <span className="font-semibold text-blue-600">${priceRange}</span>
+            </p>
           </div>
+
           <div>
             <h2 className="text-xl ">color</h2>
             <div>

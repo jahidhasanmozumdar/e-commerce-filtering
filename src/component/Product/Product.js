@@ -2,6 +2,7 @@ import React from "react";
 
 const Product = (props) => {
   const { img, title, prevPrice, newPrice, company } = props.products;
+
   return (
     <div className="min-w-[343px] min-h-[477px] max-h-[477px] px-[10px] py-[15px] bg-white rounded-xl shadow-lg border border-gray-500 hover:shadow-xl hover:scale-120 transition-all transform duration-500">
       <div className="min-h-[231px] max-h-[225px] w-full overflow-hidden">
